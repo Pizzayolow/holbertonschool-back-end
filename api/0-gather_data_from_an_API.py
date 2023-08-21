@@ -28,6 +28,6 @@ if __name__ == "__main__":
 
     # Print final output and format the prompt
     print(
-        f"Employee {dict_d['name']} is done with tasks ({ct}/{len(dt_tk)}):")
+        f"Employee {dict_d['name']} is done with tasks({ct}/{len(dt_tk)}):")
     for element in list_task_completed:
         print("\t" + ' ' + element)
