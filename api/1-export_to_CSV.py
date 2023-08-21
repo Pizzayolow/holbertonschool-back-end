@@ -93,8 +93,10 @@ def main():
     list_detailled = []
     for task in data_csv:
         inner_list = []
-        inner_list = dict_employee_csv["username"], dict_employee_csv["id"],
-        task["completed"], task["title"]
+        inner_list = (dict_employee_csv["id"],
+                      dict_employee_csv["username"],
+                      task["completed"],
+                      task["title"])
         list_detailled.append(inner_list)
     print(list_detailled)
 
