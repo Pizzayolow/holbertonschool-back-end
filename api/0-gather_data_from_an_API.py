@@ -16,18 +16,18 @@ if __name__ == "__main__":
     user_id = {'userId': sys.argv[1]}
     tasks = requests.get(
         'https://jsonplaceholder.typicode.com/todos', params=user_id)
-    data_task = tasks.json()
+    dt_tk = tasks.json()
 
     # Create a counter to know the number of completed tasks
-    count = 0
+    ct = 0
     list_task_completed = []
-    for element in data_task:
+    for element in dt_tk:
         if element['completed'] is True:
             list_task_completed.append((element["title"]))
-            count += 1
+            ct += 1
 
     # Print final output and format the prompt
     print(
-        f"Employee {dict_d['name']} is done with tasks ({count}/{len(data_task)}):")
+        f"Employee {dict_d['name']} is done with tasks ({ct}/{len(dt_tk)}):")
     for element in list_task_completed:
         print("\t" + ' ' + element)
