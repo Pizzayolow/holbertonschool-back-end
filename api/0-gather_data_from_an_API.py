@@ -1,32 +1,31 @@
 #!/usr/bin/python3
-
+"""Requests some data with API and return infos"""
 import requests
 import sys
 from collections import Counter
 
-"""get the name of the employee by id"""
-employee_id = {'id': sys.argv[1]}
-response = requests.get(
-    'https://jsonplaceholder.typicode.com/users/', params=employee_id)
-"""converti le get en format json"""
-data = response.json()
-"""créer un dictionnaire afin de pouvoir extraire le nom"""
-dict_d = data[0]
+# Requests some data with API
 
-"""get the task"""
+# Get the name of the employee by ID
+employee_id = {'id': sys.argv[1]}
+response = requests.get('https://jsonplaceholder.typicode.com/users/', params=employee_id)
+data = response.json()
+dict_d = data[0]  # Create a dictionary to extract the name
+
+# Get the tasks
 user_id = {'userId': sys.argv[1]}
-tasks = requests.get(
-    'https://jsonplaceholder.typicode.com/todos', params=user_id)
+tasks = requests.get('https://jsonplaceholder.typicode.com/todos', params=user_id)
 data_task = tasks.json()
-"""créer un compteur afin de connaitre le nombre de task accomplies"""
+
+# Create a counter to know the number of completed tasks
 count = 0
 list_task_completed = []
 for element in data_task:
     if element['completed'] is True:
         list_task_completed.append((element["title"]))
         count += 1
-"""print final et mise en forme du prompt"""
-print(
-    f"Employee {dict_d['name']} is done with tasks({count}/{len(data_task)}):")
+
+# Print final output and format the prompt
+print(f"Employee {dict_d['name']} is done with tasks ({count}/{len(data_task)}):")
 for element in list_task_completed:
     print("\t" + ' ' + element)
