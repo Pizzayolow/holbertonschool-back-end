@@ -63,7 +63,7 @@ def main():
 
     # Retrieve employee related data
     employee_data = get_employee_data(employee_id)
-    name_employee = employee_data.get("name")
+    name_employee = employee_data.get("username")
 
     # Retrieve tasks related data
     tasks_data = get_tasks_data(employee_id)
