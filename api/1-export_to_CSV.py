@@ -98,7 +98,9 @@ def main():
         list_detailled.append(inner_list)
     print(list_detailled)
 
-    with open('USER_ID.csv', 'w', newline='')as csvfile:
+
+    
+    with open(employee_id + '.csv', 'w', newline='')as csvfile:
         writer = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_ALL)
         writer.writerows(list_detailled)
 
