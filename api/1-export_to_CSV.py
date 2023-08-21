@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 """ Using the REST API jsonplaceholder """
+import csv
 import requests
 import sys
-import csv
+
 
 BASE_URL = "https://jsonplaceholder.typicode.com"
 USERS_URL = BASE_URL + "/users/"
