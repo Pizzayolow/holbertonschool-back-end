@@ -36,40 +36,50 @@ def get_tasks_data(user_id):
 
 def get_list_task(tasks_data, name_employee, id_employee):
     """make lists with data"""
+
     list_task = []
-    for dict in tasks_data:  # liste de dictionnaires
+    for dict in tasks_data:
         new_dict = {
             "username": name_employee,
             "task": dict["title"],
             "completed": dict["completed"],
         }
         list_task.append(new_dict)
-
-    concat_filename = str(id_employee) + ".json"
     return list_task
 
 
-def list_to_json(total_dict, filename):
+def list_to_json(total_dict):
     """list to json file"""
-    with open('todo_all_employees.json', "w") as json_file:
+    with open("todo_all_employees.json", "w") as json_file:
         json.dump(total_dict, json_file)
 
 
+def get_json_dict(employee_data):
+    """save tasks in a dictionnary"""
+    json_dict = {}
+    for employee in employee_data:
+        user_id = employee["id"]
+        user_name = employee["username"]
+        tasks_data = get_tasks_data(user_id)
+        new_dict = get_list_task(tasks_data, user_name, user_id)
+        json_dict[user_id] = new_dict
+    return json_dict
+
+
 def main():
-    if len(sys.argv) > 2:
-        print("Usage: script_name employee_id")
+    if len(sys.argv) > 1:
+        print("Usage: script_name")
         sys.exit(1)
 
+    # Retrieve employee related data
+    employee_data = get_employee_data()
 
-employees = get_employee_data()
-json_dict = {}
-for employee in employees:
-    user_id = employee['id']
-    name_employee = employee['name']
-    task_data = get_tasks_data(user_id)
-    list_task = get_list_task(task_data, name_employee, user_id)
-    json_dict[user_id] = list_task
-list_to_json(json_dict, 'todo_all_employees.json')
+    # Retrieve all task by employee
+    json_dict = get_json_dict(employee_data)
+
+    # Save in json
+    list_to_json(json_dict)
+
 
 if __name__ == "__main__":
     main()
